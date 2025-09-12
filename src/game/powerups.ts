@@ -1,6 +1,7 @@
 import { Application, Sprite, Texture } from "pixi.js";
-import { HUD } from "../hud";
-import { Ship } from "../ship";
+import { HUD } from "./hud";
+import { Ship } from "./ship";
+import { SoundManager } from "./sound";
 
 type PowerUpObj = {
   sprite: Sprite;
@@ -49,6 +50,7 @@ export function updatePowerUps(app: Application, H: number, ship: Ship, hud: HUD
     const dist = Math.sqrt(dx * dx + dy * dy);
 
     if (dist < 28) {
+      SoundManager.playPowerUp();
       if (pu.ptype === "life") {
         hud.setLives(Math.min(hud.getLives() + 1, 3));
       } else {

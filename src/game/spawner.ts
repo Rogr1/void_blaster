@@ -1,6 +1,6 @@
 import { Application } from "pixi.js";
-import { Asteroid } from "../asteroids";
-import { Ship } from "../ship";
+import { Asteroid } from "./asteroids";
+import { Ship } from "./ship";
 
 export function spawnAsteroid(app: Application, asteroids: Asteroid[], ship: Ship): void {
   const W = app.renderer.width;

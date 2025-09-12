@@ -9,11 +9,10 @@ export function showMenu(app: Application) {
   const container = new Container();
   app.stage.addChild(container);
 
-  // === Hintergrund ===
+  // === Background ===
   const bg = new Graphics();
   container.addChild(bg);
 
-  // === Sterne einmalig erzeugen ===
   const stars: { g: Graphics; speed: number }[] = [];
   const STAR_COUNT = 100;
   for (let i = 0; i < STAR_COUNT; i++) {
@@ -29,7 +28,6 @@ export function showMenu(app: Application) {
     });
   }
 
-  // Sterne bewegen
   app.ticker.add(() => {
     const H = app.renderer.height;
     const W = app.renderer.width;
@@ -42,14 +40,14 @@ export function showMenu(app: Application) {
     }
   });
 
-  // === Titel ===
+  // === Title ===
   const title = new Text({
     text: "Void Blaster",
     style: { fill: 0xffffff, fontSize: 48, fontFamily: "monospace" },
   });
   container.addChild(title);
 
-  // === Schiff unten mittig ===
+  // === Ship ===
   const shipImg = document.getElementById("ship-img") as HTMLImageElement;
   const ship = new Sprite(Texture.from(shipImg));
   ship.anchor.set(0.5);

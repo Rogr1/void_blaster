@@ -1,10 +1,10 @@
 import { Application, Ticker } from "pixi.js";
-import { Ship } from "../ship";
-import { HUD } from "../hud";
-import { Asteroid } from "../asteroids";
-import { Bullet } from "../bullet";
-import { Score } from "../score";
-import { CollisionManager } from "../collision";
+import { Ship } from "./ship";
+import { HUD } from "./hud";
+import { Asteroid } from "./asteroids";
+import { Bullet } from "./bullet";
+import { Score } from "./score";
+import { CollisionManager } from "./collision";
 import { SoundManager } from "./sound";
 import { globals } from "./globals";
 
@@ -97,7 +97,9 @@ export function createGameLoop(cfg: LoopConfig) {
     cfg.updatePowerUps();
     cfg.collision.update();
 
-    if (cfg.hud.getLives() <= 0) {
+    if (cfg.hud.getLives() <= 0 && globals.gameLoop) {
+      cfg.app.ticker.remove(globals.gameLoop);
+      globals.gameLoop = null;
       setTimeout(cfg.gameOver, 300);
     }
   };

@@ -1,9 +1,9 @@
 import { Application } from "pixi.js";
-import { Ship } from "../ship";
-import { Asteroid } from "../asteroids";
-import { HUD } from "../hud";
-import { CollisionManager } from "../collision";
-import { Score } from "../score";
+import { Ship } from "./ship";
+import { Asteroid } from "./asteroids";
+import { HUD } from "./hud";
+import { CollisionManager } from "./collision";
+import { Score } from "./score";
 import { waitForImages } from "./helpers";
 import { spawnAsteroid } from "./spawner";
 import { globals, resetGlobals } from "./globals";

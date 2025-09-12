@@ -1,6 +1,6 @@
 import { Application, Ticker } from "pixi.js";
-import { Ship } from "../ship";
-import { Bullet } from "../bullet";
+import { Ship } from "./ship";
+import { Bullet } from "./bullet";
 
 export const globals = {
   appRef: null as Application | null,

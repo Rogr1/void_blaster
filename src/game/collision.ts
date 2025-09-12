@@ -1,7 +1,7 @@
 import { Ship } from "./ship";
 import { Asteroid } from "./asteroids";
 import { HUD } from "./hud";
-import { SoundManager } from "./game/sound";
+import { SoundManager } from "./sound";
 
 export class CollisionManager {
   private invincible = false;

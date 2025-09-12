@@ -1,6 +1,6 @@
 import { Application, Graphics, Text, Container } from "pixi.js";
 import { globals } from "./globals";
-import { Score } from "../score";
+import { Score } from "./score";
 import { SoundManager } from "./sound";
 import { startGame } from "./game";
 
@@ -17,6 +17,33 @@ export function showGameOver(app: Application, score: Score) {
 
   const bg = new Graphics();
   container.addChild(bg);
+
+   const stars: { g: Graphics; speed: number }[] = [];
+  const STAR_COUNT = 100;
+  for (let i = 0; i < STAR_COUNT; i++) {
+    const star = new Graphics();
+    star.circle(0, 0, Math.random() * 2 + 1).fill({ color: 0xffffff });
+    star.x = Math.random() * app.renderer.width;
+    star.y = Math.random() * app.renderer.height;
+    container.addChild(star);
+
+    stars.push({
+      g: star,
+      speed: Math.random() * 1 + 0.5, 
+    });
+  }
+
+  app.ticker.add(() => {
+    const H = app.renderer.height;
+    const W = app.renderer.width;
+    for (const star of stars) {
+      star.g.y += star.speed;
+      if (star.g.y > H) {
+        star.g.y = 0;
+        star.g.x = Math.random() * W;
+      }
+    }
+  });
 
   const title = new Text({
     text: "💀 GAME OVER 💀",

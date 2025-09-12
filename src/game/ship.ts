@@ -1,7 +1,7 @@
 import { Sprite, Texture } from "pixi.js";
 
 export class Ship extends Sprite {
-  private speed = 2;
+  private speed = 2.5;
   private keys: Record<string, boolean> = {};
 
   constructor(imgEl: HTMLImageElement, startX: number, startY: number) {
