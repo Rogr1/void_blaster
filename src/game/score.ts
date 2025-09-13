@@ -9,12 +9,12 @@ export class Score extends Container {
   constructor(stageWidth: number) {
     super();
 
-    // Load high score from localStorage, default to 0
+    // Highscore laden
     const saved = localStorage.getItem("highscore");
     this.highscore = saved ? parseInt(saved, 10) : 0;
 
     this.scoreText = new Text({
-      text: `Score: 0`,
+      text: "Score: 0",
       style: {
         fill: 0xffffff,
         fontSize: 24,
@@ -26,7 +26,7 @@ export class Score extends Container {
     this.recordText = new Text({
       text: this.highscore > 0 ? `Highscore: ${this.highscore}` : "",
       style: {
-        fill: 0xffd700, // Gold
+        fill: 0xffd700,
         fontSize: 18,
         fontFamily: "monospace",
       },
@@ -34,22 +34,28 @@ export class Score extends Container {
     this.recordText.y = 28;
     this.addChild(this.recordText);
 
-    this.x = stageWidth - 220;
+    this.layout(stageWidth);
     this.y = 16;
+
+    // Fenster-Resize -> neu layouten
+    window.addEventListener("resize", () => {
+      this.layout(window.innerWidth);
+    });
   }
 
   public addPoints(amount: number) {
     this.score += amount;
     this.scoreText.text = `Score: ${this.score}`;
 
-    // Check high score
     if (this.score > this.highscore) {
       if (this.highscore > 0) {
-        this.recordText.text = "✨ NEW RECORD!";
+        this.recordText.text = "NEW RECORD!";
       }
       this.highscore = this.score;
       localStorage.setItem("highscore", this.highscore.toString());
     }
+
+    this.layout(window.innerWidth);
   }
 
   public reset() {
@@ -57,6 +63,7 @@ export class Score extends Container {
     this.scoreText.text = "Score: 0";
     this.recordText.text =
       this.highscore > 0 ? `Highscore: ${this.highscore}` : "";
+    this.layout(window.innerWidth);
   }
 
   public getScore(): number {
@@ -65,5 +72,9 @@ export class Score extends Container {
 
   public getHighscore(): number {
     return this.highscore;
+  }
+
+  private layout(stageWidth: number) {
+    this.x = stageWidth - this.width - 16; // rechts oben mit Padding
   }
 }

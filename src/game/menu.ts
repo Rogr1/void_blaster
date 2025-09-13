@@ -51,7 +51,7 @@ export function showMenu(app: Application) {
   const shipImg = document.getElementById("ship-img") as HTMLImageElement;
   const ship = new Sprite(Texture.from(shipImg));
   ship.anchor.set(0.5);
-  ship.scale.set(0.07); // etwas kleiner
+  ship.scale.set(0.07); 
   container.addChild(ship);
 
   // === Start-Button ===
